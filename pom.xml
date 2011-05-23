@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.christhomson</groupId>
-	<artifactId>coherence-viewer</artifactId>
+	<artifactId>sibyl</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Coherence Cache Viewer</name>
+	<name>Sibyl - Coherence Cache Viewer</name>
 
 	<dependencies>
 		<dependency>
@@ -64,10 +64,14 @@
 		</dependency>
 
 	</dependencies>
-	<url>www.chris-thomson.co.uk</url>
+	<url>www.chris-thomson.co.uk/sibyl</url>
 	<scm>
-		<connection>scm:https://coherenceviewer.svn.sourceforge.net/svnroot/coherenceviewer</connection>
+		<connection>scm:https://sibyl.svn.sourceforge.net/svnroot/sibyl</connection>
 	</scm>
+	<organization>
+		<name>Chris Thomson Enterprises</name>
+		<url>www.chris-thomson.co.uk</url>
+	</organization>
 	<build>
 		<finalName>cache-viewer</finalName>
 
