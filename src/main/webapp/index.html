@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Coherence Cache Viewer</title>
+<link href="css/boosting/style.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<div id="logo">
+			<h1><a href="#">Coherence Cache Viewer</a></h1>
+		</div>
+	</div>
+	<!-- end #header -->
+	<div id="page">
+	<div id="page-bgtop">
+	<div id="page-bgbtm">
+		<div id="content">
+			<div class="post">
+				<h2 class="title"><a name="FindKeyClass">What Is It?</a></h2>
+				<div style="clear: both;">&nbsp;</div>
+				<div class="entry">
+					<p>Oracle Coherence is an extremely powerful caching solution which takes caching to
+					a new level of functionality.</p> 
+					
+					<p>Out of th ebox it comes with a command line tool allowing you to extract simple 
+					data out of the cache with a given key. However, this tool only really supports keys
+					which are Java primitives. Even if you use a primitive as a key, the output for the 
+					value simply shows the <code>toString()</code> output.</p>
+					
+					<p>In my experience, the keys that are put in the cache are generally custom and more 
+					complex that simple Java primitives. They objects can not be constructed from the 
+					command line tool and the only alternative is to write a custom piece of code to 
+					extract this from the cache.</p>
+					
+					<p>In a production environment, it is not easy to write custom extractors on the fly.
+					Time constraints and release policies for production tend to make this a more tedious
+					process. </p>
+					
+					<p>The Coherence Cache Viewer tool provides two ways to construct and extract 
+					information from the cache. There is a command line tool and a web based application.</p>
+					
+				</div>
+			</div>
+			
+			<div style="clear: both;">&nbsp;</div>
+		</div>
+		<!-- end #content -->
+		<div id="sidebar">
+			<h2><a href="">Home</a></h2>
+			<h2><a href="Extractor">Extractor</a></h2>
+			<h2><a href="tutorial-web.html">Web Tutorial</a></h2>
+			<h2><a href="tutorial-cl.html">Command Line Tutorial</a></h2>
+		</div>
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	</div>
+	</div>
+	<!-- end #page -->
+</div>
+	<div id="footer">
+		<p>Copyright (c) 2011 www.chris-thomson.co.uk. All rights reserved. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+	</div>
+	<!-- end #footer -->
+</body>
+</html>
