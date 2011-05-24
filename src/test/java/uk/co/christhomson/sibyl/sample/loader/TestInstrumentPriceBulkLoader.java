@@ -13,47 +13,53 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.co.christhomson.coherence.utilities.TestCoherenceBase;
-import uk.co.christhomson.sibyl.sample.loader.InstrumentPriceBulkLoader;
+import uk.co.christhomson.sibyl.cache.connectors.CacheConnector;
+import uk.co.christhomson.sibyl.cache.connectors.ConnectorBuilder;
+import uk.co.christhomson.sibyl.cache.connectors.HashMapConnector;
+import uk.co.christhomson.sibyl.cache.connectors.TestCacheBase;
+import uk.co.christhomson.sibyl.exception.CacheException;
 import uk.co.christhomson.sibyl.sample.objects.InstrumentPrice;
 import uk.co.christhomson.sibyl.sample.objects.InstrumentPriceKey;
 import uk.co.christhomson.sibyl.sample.objects.PriceSource;
 
-import com.tangosol.net.CacheFactory;
-import com.tangosol.net.NamedCache;
+public class TestInstrumentPriceBulkLoader extends TestCacheBase {
 
-public class TestInstrumentPriceBulkLoader extends TestCoherenceBase {
-
-	private NamedCache cache = null;
+	private CacheConnector connector = null;
+	private String cacheName = "TEST_PRICE_CACHE";
+	
+	private String connectorName = HashMapConnector.class.getName();
 	
 	public TestInstrumentPriceBulkLoader() {
 		super(false);
 	}
 	
 	@Before
-	public void setup() {
+	public void setup() throws Exception {
 		super.setup();
 		
-		cache = CacheFactory.getCache("TEST_PRICE_CACHE");
-
+		connector = ConnectorBuilder.getConnector(connectorName);
+		connector.clearAll();
+		
 		InstrumentPriceBulkLoader priceLoader = new InstrumentPriceBulkLoader(
-				cache);
-		priceLoader.generatePrices("VOD.L", PriceSource.BLOOMBERG);
+				connector);
+		priceLoader.generatePrices(cacheName, "VOD.L", PriceSource.BLOOMBERG);
 	}
 	
 	@Test
-	public void test() {
+	public void test() throws CacheException {
 		Date date = new GregorianCalendar(2010, Calendar.JANUARY, 4).getTime();
 		
 		InstrumentPriceKey key = new InstrumentPriceKey("VOD.L", date, PriceSource.BLOOMBERG);
 		System.out.println(key);
 		
-		InstrumentPrice price = (InstrumentPrice) cache.get(key);
+		InstrumentPrice price = (InstrumentPrice) connector.get(cacheName, key);
 		System.out.println(price);
 		
-		cache.put(key, key);
+		System.out.println(connector.getAll(cacheName).size());
 		
-		System.out.println(cache.get(key));
+		connector.put(cacheName, key, key);
+		
+		System.out.println(connector.get(cacheName, key));
 		
 		assertNotNull(price);
 	}
