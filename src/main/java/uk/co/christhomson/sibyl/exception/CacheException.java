@@ -2,7 +2,7 @@ package uk.co.christhomson.sibyl.exception;
 
 /*
 CacheException
- Exception raised from Coherence cache system
+ Exception raised from the cache system
 
 Copyright (C) 2011 Chris Thomson
 */

@@ -6,18 +6,19 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Properties;
 
-import uk.co.christhomson.coherence.utilities.CacheExtractor;
 import uk.co.christhomson.reflection.builders.ObjectBuilder;
+import uk.co.christhomson.sibyl.cache.connectors.CacheConnector;
+import uk.co.christhomson.sibyl.cache.connectors.ConnectorBuilder;
 import uk.co.christhomson.sibyl.exception.CacheException;
 import uk.co.christhomson.sibyl.utilities.PropertyBuilder;
 
 /*
- CoherenceViewer
+ CacheViewer
   Command line utility to extract data from cache from command line
 
  Copyright (C) 2011 Chris Thomson
  */
-public class CoherenceViewer {
+public class CacheViewer {
 
 	public static void main(String[] args) throws SecurityException,
 			ClassNotFoundException, InstantiationException,
@@ -31,11 +32,11 @@ public class CoherenceViewer {
 		String cacheName = args[0];
 		String className = args[1];
 		
-		CacheExtractor viewer = new CacheExtractor(cacheName);
+		CacheConnector connector = ConnectorBuilder.getConnector();
+		
 		Properties properties = null;
 		
 		Object value = null;
-		
 		
 		if (args.length == 2) {
 			// take user input to build properties
@@ -48,7 +49,7 @@ public class CoherenceViewer {
 		}
 		
 		ObjectBuilder builder = new ObjectBuilder(className, PropertyBuilder.processProperties(properties));
-		value = viewer.extract(builder.build());
+		value = connector.get(cacheName,builder.build());
 		
 		System.out.println("Result:");
 		System.out.println(value);
@@ -57,7 +58,7 @@ public class CoherenceViewer {
 	private static void usage() {
 		System.out.println("********************************************");
 		System.out
-				.println("Usage: uk.co.christhomson.coherence.viewer.commandline.CoherenceViewer <cache-name> <class-name> [<properties-file>]");
+				.println("Usage: uk.co.christhomson.sibyl.commandline.CacheViewer <cache-name> <class-name> [<properties-file>]");
 		System.out.println("********************************************");
 	}
 

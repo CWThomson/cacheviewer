@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import uk.co.christhomson.sibyl.cache.connectors.CacheConnector;
+import uk.co.christhomson.sibyl.cache.connectors.ConnectorBuilder;
+import uk.co.christhomson.sibyl.exception.CacheException;
 import uk.co.christhomson.sibyl.sample.objects.InstrumentPrice;
 import uk.co.christhomson.sibyl.sample.objects.InstrumentPriceKey;
 import uk.co.christhomson.sibyl.sample.objects.PriceSource;
-
-import com.tangosol.net.CacheFactory;
-import com.tangosol.net.NamedCache;
 
 /*
  InstrumentPriceBulkLoader
@@ -23,20 +23,22 @@ import com.tangosol.net.NamedCache;
  */
 public class InstrumentPriceBulkLoader {
 
-	private NamedCache cache = null;
+	private CacheConnector connector = null;
 
-	public static final void main(String[] args) {
-		String cacheName = args[0];
-		NamedCache cache = CacheFactory.getCache(cacheName);
-		InstrumentPriceBulkLoader loader = new InstrumentPriceBulkLoader(cache);
-		loader.loadAll();
+	public static final void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, CacheException {
+		String connectorName = args[0];
+		String cacheName = args[1];
+		
+		CacheConnector connector = ConnectorBuilder.getConnector(connectorName);
+		InstrumentPriceBulkLoader loader = new InstrumentPriceBulkLoader(connector);
+		loader.loadAll(cacheName);
 	}
 
-	public InstrumentPriceBulkLoader(NamedCache cache) {
-		this.cache = cache;
+	public InstrumentPriceBulkLoader(CacheConnector connector) {
+		this.connector = connector;
 	}
 
-	public void generatePrices(String ticker, PriceSource source) {
+	public void generatePrices(String cacheName, String ticker, PriceSource source) throws CacheException {
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.set(2010, Calendar.JANUARY, 1, 0, 0, 0);
 		Random rand = new Random();
@@ -59,19 +61,19 @@ public class InstrumentPriceBulkLoader {
 			prices.put(key, value);
 		}
 
-		cache.putAll(prices);
+		connector.putAll(cacheName, prices);
 	}
 
-	public void loadAll() {
-		generatePrices("VOD.L", PriceSource.BLOOMBERG);
-		generatePrices("VOD.L", PriceSource.REUTERS);
-		generatePrices("RBS.L", PriceSource.BLOOMBERG);
-		generatePrices("RBS.L", PriceSource.REUTERS);
-		generatePrices("BT.L", PriceSource.BLOOMBERG);
-		generatePrices("BT.L", PriceSource.REUTERS);
-		generatePrices("IBM.N", PriceSource.BLOOMBERG);
-		generatePrices("IBM.N", PriceSource.REUTERS);
-		generatePrices("III.L", PriceSource.BLOOMBERG);
-		generatePrices("III.L", PriceSource.REUTERS);
+	public void loadAll(String cacheName) throws CacheException {
+		generatePrices(cacheName,"VOD.L", PriceSource.BLOOMBERG);
+		generatePrices(cacheName,"VOD.L", PriceSource.REUTERS);
+		generatePrices(cacheName,"RBS.L", PriceSource.BLOOMBERG);
+		generatePrices(cacheName,"RBS.L", PriceSource.REUTERS);
+		generatePrices(cacheName,"BT.L", PriceSource.BLOOMBERG);
+		generatePrices(cacheName,"BT.L", PriceSource.REUTERS);
+		generatePrices(cacheName,"IBM.N", PriceSource.BLOOMBERG);
+		generatePrices(cacheName,"IBM.N", PriceSource.REUTERS);
+		generatePrices(cacheName,"III.L", PriceSource.BLOOMBERG);
+		generatePrices(cacheName,"III.L", PriceSource.REUTERS);
 	}
 }

@@ -2,7 +2,7 @@ package uk.co.christhomson.sibyl.exception;
 
 /*
 InvalidCacheNameException
- Exception raised when cache does not exist in Coherence
+ Exception raised when cache does not exist
 
 Copyright (C) 2011 Chris Thomson
 */
