@@ -14,7 +14,7 @@
 	<xsl:template match="Extraction">
 		<html>
 			<head>
-				<title>Coherence Cache Viewer : Extractor</title>
+				<title>Sibyl Cache Viewer : Extractor</title>
 				<link rel="stylesheet" type="text/css" href="css/boosting/style.css" />
 				<SCRIPT LANGUAGE="JavaScript" SRC="tree/mktree.js"></SCRIPT>
 				<script language="JavaScript" src="cal/calendar_db.js"></script>
@@ -26,7 +26,7 @@
 						<div id="logo">
 
 							<h1>
-								<a href="#">Coherence Cache Viewer : Extractor</a>
+								<a href="#">Sibyl Cache Viewer : Extractor</a>
 							</h1>
 							<p>
 								developed by
