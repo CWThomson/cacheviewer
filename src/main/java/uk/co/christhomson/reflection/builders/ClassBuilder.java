@@ -6,7 +6,7 @@ import java.util.Map;
 /*
  ClassBuilder
   Wrapper class to build an object from a properties file
-  and extract value from a Coherence cace
+  and extract value from a cache
  
  Copyright (C) 2011 Chris Thomson
  */
