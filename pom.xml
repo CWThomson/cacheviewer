@@ -73,7 +73,7 @@
 		<url>www.chris-thomson.co.uk</url>
 	</organization>
 	<build>
-		<finalName>cache-viewer</finalName>
+		<!-- finalName>sibyl</finalName-->
 
 		<plugins>
 			<plugin>

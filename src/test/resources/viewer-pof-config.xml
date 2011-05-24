@@ -6,32 +6,32 @@
 		
 		<user-type>
 			<type-id>3001</type-id>
-			<class-name>uk.co.christhomson.coherence.viewer.sample.objects.TestKey1</class-name>
+			<class-name>uk.co.christhomson.sibyl.sample.objects.TestKey1</class-name>
 		</user-type>
 		<user-type>
 			<type-id>3002</type-id>
-			<class-name>uk.co.christhomson.coherence.viewer.sample.objects.TestKey2</class-name>
+			<class-name>uk.co.christhomson.sibyl.sample.objects.TestKey2</class-name>
 		</user-type>
 		<user-type>
 			<type-id>3003</type-id>
-			<class-name>uk.co.christhomson.coherence.viewer.sample.objects.TestKey3</class-name>
+			<class-name>uk.co.christhomson.sibyl.sample.objects.TestKey3</class-name>
 		</user-type>
 		<user-type>
 			<type-id>3004</type-id>
-			<class-name>uk.co.christhomson.coherence.viewer.sample.objects.TestKey4</class-name>
+			<class-name>uk.co.christhomson.sibyl.sample.objects.TestKey4</class-name>
 		</user-type>
 		<user-type>
 			<type-id>3005</type-id>
-			<class-name>uk.co.christhomson.coherence.viewer.sample.objects.TestKey5</class-name>
+			<class-name>uk.co.christhomson.sibyl.sample.objects.TestKey5</class-name>
 		</user-type>
 		
 		<user-type>
 			<type-id>4001</type-id>
-			<class-name>uk.co.christhomson.coherence.viewer.sample.objects.InstrumentPriceKey</class-name>
+			<class-name>uk.co.christhomson.sibyl.sample.objects.InstrumentPriceKey</class-name>
 		</user-type>
 		<user-type>
 			<type-id>4002</type-id>
-			<class-name>uk.co.christhomson.coherence.viewer.sample.objects.InstrumentPrice</class-name>
+			<class-name>uk.co.christhomson.sibyl.sample.objects.InstrumentPrice</class-name>
 		</user-type>		
 	</user-type-list>
 	<allow-interfaces>true</allow-interfaces>

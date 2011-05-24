@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Class name="uk.co.christhomson.coherenceviewer.objects.TestKey1">
+<Class name="uk.co.christhomson.sibyl.sample.objects.TestKey1">
 	<Field name="k1" type="int" />
 	<Field name="k2" type="String" />
 	<Field name="k3" type="short" />
