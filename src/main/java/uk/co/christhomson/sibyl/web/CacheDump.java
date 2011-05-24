@@ -14,9 +14,8 @@ import com.tangosol.net.CacheFactory;
 import com.tangosol.net.NamedCache;
 
 /*
-BulkLoader
- Servlet to bulk load test data into test Coherence cache
-  - currrent loads random price data for a number of securities
+CacheDump
+ Servlet to display all data in a cache
 
 Copyright (C) 2011 Chris Thomson
 */

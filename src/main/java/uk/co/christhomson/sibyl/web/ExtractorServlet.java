@@ -23,10 +23,11 @@ import org.jdom.Element;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
-import uk.co.christhomson.coherence.utilities.CacheExtractor;
 import uk.co.christhomson.reflection.builders.ClassBuilder;
 import uk.co.christhomson.reflection.builders.ObjectBuilder;
 import uk.co.christhomson.reflection.builders.XmlObjectBuilder;
+import uk.co.christhomson.sibyl.cache.connectors.CacheConnector;
+import uk.co.christhomson.sibyl.cache.connectors.ConnectorBuilder;
 import uk.co.christhomson.sibyl.exception.CacheException;
 import uk.co.christhomson.sibyl.exception.InvalidCacheNameException;
 import uk.co.christhomson.sibyl.utilities.PropertyBuilder;
@@ -46,9 +47,19 @@ public class ExtractorServlet extends HttpServlet {
 	private static final Logger log = Logger.getLogger(ExtractorServlet.class);
 
 	private XsltHelper xsltHelper = null;
+	
+	private CacheConnector connector = null;
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
+		
+		String connectorName = System.getProperty("connector");
+		try {
+			connector = ConnectorBuilder.getConnector(connectorName);
+		}
+		catch (Exception ex) {
+			throw new ServletException(ex);
+		}
 
 		reloadXslt(config);
 	}
@@ -116,10 +127,10 @@ public class ExtractorServlet extends HttpServlet {
 
 //		Map<String, Object> objParams = PropertyBuilder.processProperties(params);
 
-		CacheExtractor extractor = new CacheExtractor(cacheName);
+//		CacheConnector extractor = ConnectorBuilder.getConnector(connectorName);
 //		Object obj = extractor.extract(params.get("className")[0],
 //				PropertyBuilder.processProperties(objParams));
-		Object result = extractor.extract(key);
+		Object result = connector.get(cacheName,key);
 //		System.out.println("ResultClass:" + obj.getClass().getName());
 		return result;
 	}
