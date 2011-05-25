@@ -13,5 +13,7 @@ public interface CacheConnector {
 	
 	public void clear(String cacheName) throws CacheException;
 	public void clearAll() throws CacheException;
+	
+	public int getCacheSize(String cacheName) throws CacheException;
 
 }

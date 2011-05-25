@@ -57,4 +57,9 @@ public class HashMapConnector implements CacheConnector {
 	public void clearAll() throws CacheException {
 		caches.clear();
 	}
+
+	public int getCacheSize(String cacheName) throws CacheException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
