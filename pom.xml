@@ -5,7 +5,7 @@
 	<artifactId>sibyl</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Sibyl - Coherence Cache Viewer</name>
+	<name>Sibyl - Cache Viewer</name>
 
 	<dependencies>
 		<dependency>
@@ -31,20 +31,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>oracle</groupId>
-			<artifactId>coherence</artifactId>
-			<version>3.6.1</version>
-			<scope>system</scope>
-			<systemPath>C:\Program Files (x86)\coherence\lib\coherence.jar</systemPath>
-		</dependency>
-		<!-- dependency>
-			<groupId>oracle</groupId>
-			<artifactId>coherence-common</artifactId>
-			<version>3.6.1</version>
-			<scope>system</scope>
-			<systemPath>C:\Program Files (x86)\coherence\lib\coherence-3.6-common-1.7.3.20019.jar</systemPath>
-		</dependency-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -91,6 +77,25 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<packaging>jar</packaging>
+							<artifactId>${project.artifactId}</artifactId>
+							<groupId>${project.groupId}</groupId>
+							<version>${project.version}</version>
+							<file>${project.build.directory}/${project.artifactId}-${project.version}.jar</file>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.0-beta-3</version>
 			</plugin>
@@ -125,14 +130,13 @@
 							<name>tangosol.coherence.log</name>
 							<value>stdout</value>
 						</systemProperty>
-						<!-- systemProperty>
-							<name>tangosol.pof.enabled</name>
-							<value>true</value>
-						</systemProperty>
-						<systemProperty>
+						<!--
+							systemProperty> <name>tangosol.pof.enabled</name>
+							<value>true</value> </systemProperty> <systemProperty>
 							<name>tangosol.pof.config</name>
 							<value>src/main/resources/viewer-pof-config.xml</value>
-						</systemProperty-->
+							</systemProperty
+						-->
 						<systemProperty>
 							<name>tangosol.coherence.distributed.threads</name>
 							<value>5</value>
