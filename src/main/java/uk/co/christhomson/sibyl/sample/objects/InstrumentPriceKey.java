@@ -80,7 +80,6 @@ public class InstrumentPriceKey implements PortableObject, Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		InstrumentPriceKey other = (InstrumentPriceKey) obj;
-		System.out.println(this + "-" + this.getDate().getTime() + " vs " + other + "-" + other.getDate().getTime());
 		
 		if (date == null) {
 			if (other.date != null)

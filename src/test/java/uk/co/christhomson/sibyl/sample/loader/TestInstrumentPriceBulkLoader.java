@@ -50,16 +50,10 @@ public class TestInstrumentPriceBulkLoader extends TestCacheBase {
 		Date date = new GregorianCalendar(2010, Calendar.JANUARY, 4).getTime();
 		
 		InstrumentPriceKey key = new InstrumentPriceKey("VOD.L", date, PriceSource.BLOOMBERG);
-		System.out.println(key);
 		
 		InstrumentPrice price = (InstrumentPrice) connector.get(cacheName, key);
-		System.out.println(price);
-		
-		System.out.println(connector.getAll(cacheName).size());
 		
 		connector.put(cacheName, key, key);
-		
-		System.out.println(connector.get(cacheName, key));
 		
 		assertNotNull(price);
 	}
@@ -96,6 +90,5 @@ public class TestInstrumentPriceBulkLoader extends TestCacheBase {
 		ObjectOutputStream serializer = new ObjectOutputStream(new FileOutputStream("C:\\temp\\test2"));
 		serializer.writeObject(key1);
 		serializer.close();
-		
 	}
 }

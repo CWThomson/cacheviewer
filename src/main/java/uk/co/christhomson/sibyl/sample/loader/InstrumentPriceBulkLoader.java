@@ -41,6 +41,7 @@ public class InstrumentPriceBulkLoader {
 	public void generatePrices(String cacheName, String ticker, PriceSource source) throws CacheException {
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.set(2010, Calendar.JANUARY, 1, 0, 0, 0);
+		cal.set(Calendar.MILLISECOND, 0);
 		Random rand = new Random();
 
 		Map<InstrumentPriceKey, InstrumentPrice> prices = new HashMap<InstrumentPriceKey, InstrumentPrice>();
@@ -50,13 +51,11 @@ public class InstrumentPriceBulkLoader {
 		for (int i = 0; i < 10; i++) {
 			cal.add(Calendar.DAY_OF_YEAR, 1);
 			Date date = cal.getTime();
+			
 			price = price + ((rand.nextDouble() - 0.5) * (price / 10));
 			InstrumentPriceKey key = new InstrumentPriceKey(ticker, date,
 					source);
 			InstrumentPrice value = new InstrumentPrice(price);
-
-			System.out.println(key);
-			System.out.println(value);
 
 			prices.put(key, value);
 		}

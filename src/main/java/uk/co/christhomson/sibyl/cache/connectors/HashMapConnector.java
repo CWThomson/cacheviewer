@@ -29,13 +29,8 @@ public class HashMapConnector implements CacheConnector {
 	}
 
 	public Object get(String cacheName, Object key) throws CacheException {
-
 		Map<Object,Object> cache = getCache(cacheName);
-		
-		System.out.println(key);
-
 		Object value = cache.get(key);
-
 		return value;
 	}
 	
