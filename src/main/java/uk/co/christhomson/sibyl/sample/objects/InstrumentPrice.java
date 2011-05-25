@@ -1,11 +1,6 @@
 package uk.co.christhomson.sibyl.sample.objects;
 
-import java.io.IOException;
 import java.io.Serializable;
-
-import com.tangosol.io.pof.PofReader;
-import com.tangosol.io.pof.PofWriter;
-import com.tangosol.io.pof.PortableObject;
 
 /*
 InstrumentPrice
@@ -13,7 +8,7 @@ InstrumentPrice
 
 Copyright (C) 2011 Chris Thomson
 */
-public class InstrumentPrice implements PortableObject, Serializable {
+public class InstrumentPrice implements Serializable {
 
 	private static final long serialVersionUID = -9041885405688807715L;
 	
@@ -27,14 +22,6 @@ public class InstrumentPrice implements PortableObject, Serializable {
 	
 	public double getPrice() {
 		return price;
-	}
-
-	public void readExternal(PofReader reader) throws IOException {
-		price = reader.readDouble(0);
-	}
-
-	public void writeExternal(PofWriter writer) throws IOException {
-		writer.writeDouble(0, price);
 	}
 
 	@Override

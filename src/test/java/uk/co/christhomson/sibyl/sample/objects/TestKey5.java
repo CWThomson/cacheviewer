@@ -1,13 +1,8 @@
 package uk.co.christhomson.sibyl.sample.objects;
 
-import java.io.IOException;
 import java.util.Date;
 
-import com.tangosol.io.pof.PofReader;
-import com.tangosol.io.pof.PofWriter;
-import com.tangosol.io.pof.PortableObject;
-
-public class TestKey5 implements PortableObject {
+public class TestKey5 {
 	private Date k1 = null;
 	private Date k2 = null;
 	
@@ -51,28 +46,4 @@ public class TestKey5 implements PortableObject {
 	public String toString() {
 		return "TestKey5 [k1=" + k1 + ",k2=" + k2 + "]";
 	}
-
-	public void readExternal(PofReader reader) throws IOException {
-		long t1 = reader.readLong(0);
-		if (t1 != 0)
-			k1 = new Date(t1);
-		
-		long t2 = reader.readLong(1);
-		if (t2 != 0) 
-			k2 = new Date(t2);
-	}
-
-	public void writeExternal(PofWriter writer) throws IOException {
-		long t1 = 0;
-		if (k1 != null)
-			t1 = k1.getTime();
-		writer.writeLong(0, t1);
-		
-		long t2 = 0;
-		if (k2 != null) 
-			t2 = k2.getTime();
-		writer.writeLong(1, t2);
-	}
-	
-	
 }

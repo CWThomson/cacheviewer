@@ -1,12 +1,7 @@
 package uk.co.christhomson.sibyl.sample.objects;
 
-import java.io.IOException;
 
-import com.tangosol.io.pof.PofReader;
-import com.tangosol.io.pof.PofWriter;
-import com.tangosol.io.pof.PortableObject;
-
-public class TestKey1 implements PortableObject {
+public class TestKey1 {
 	private String k1 = null;
 	
 	public TestKey1() {}
@@ -45,14 +40,5 @@ public class TestKey1 implements PortableObject {
 	public String toString() {
 		return "TestKey4 [k1=" + k1 + "]";
 	}
-
-	public void readExternal(PofReader reader) throws IOException {
-		k1 = reader.readString(0);
-	}
-
-	public void writeExternal(PofWriter writer) throws IOException {
-		writer.writeString(0, k1);
-	}
-	
 	
 }

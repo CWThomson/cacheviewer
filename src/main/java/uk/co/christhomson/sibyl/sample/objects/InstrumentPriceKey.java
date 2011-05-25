@@ -1,12 +1,7 @@
 package uk.co.christhomson.sibyl.sample.objects;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
-
-import com.tangosol.io.pof.PofReader;
-import com.tangosol.io.pof.PofWriter;
-import com.tangosol.io.pof.PortableObject;
 
 /*
 InstrumentPriceKey
@@ -14,7 +9,7 @@ InstrumentPriceKey
 
 Copyright (C) 2011 Chris Thomson
 */
-public class InstrumentPriceKey implements PortableObject, Serializable {
+public class InstrumentPriceKey implements Serializable {
 
 	private static final long serialVersionUID = -3878397878224454476L;
 
@@ -40,18 +35,6 @@ public class InstrumentPriceKey implements PortableObject, Serializable {
 
 	public PriceSource getSource() {
 		return source;
-	}
-
-	public void readExternal(PofReader reader) throws IOException {
-		ticker = reader.readString(0);
-		date = reader.readDate(1);
-		source = PriceSource.find(reader.readInt(2));
-	}
-
-	public void writeExternal(PofWriter writer) throws IOException {
-		writer.writeString(0, ticker);
-		writer.writeDate(1, date);
-		writer.writeInt(2, source.getValue());
 	}
 
 	@Override

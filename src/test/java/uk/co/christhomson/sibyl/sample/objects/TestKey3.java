@@ -1,13 +1,8 @@
 package uk.co.christhomson.sibyl.sample.objects;
 
-import java.io.IOException;
 import java.io.Serializable;
 
-import com.tangosol.io.pof.PofReader;
-import com.tangosol.io.pof.PofWriter;
-import com.tangosol.io.pof.PortableObject;
-
-public class TestKey3 implements PortableObject, Serializable {
+public class TestKey3 implements Serializable {
 
 	private static final long serialVersionUID = 1684465904331235370L;
 
@@ -48,15 +43,5 @@ public class TestKey3 implements PortableObject, Serializable {
 	@Override
 	public String toString() {
 		return "TestKey3 [k1=" + k1 + "]";
-	}
-
-	public void readExternal(PofReader reader) throws IOException {
-		k1 = (TestKey2) reader.readObject(0);
-	}
-
-	public void writeExternal(PofWriter writer) throws IOException {
-		writer.writeObject(0, k1);
-	}
-	
-	
+	}	
 }

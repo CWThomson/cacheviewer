@@ -1,13 +1,8 @@
 package uk.co.christhomson.sibyl.sample.objects;
 
-import java.io.IOException;
 import java.io.Serializable;
 
-import com.tangosol.io.pof.PofReader;
-import com.tangosol.io.pof.PofWriter;
-import com.tangosol.io.pof.PortableObject;
-
-public class TestKey2 implements PortableObject, Serializable {
+public class TestKey2 implements Serializable {
 
 	private static final long serialVersionUID = 1581838600030608271L;
 	
@@ -154,36 +149,6 @@ public class TestKey2 implements PortableObject, Serializable {
 		} else if (!k9.equals(other.k9))
 			return false;
 		return true;
-	}
-
-	public void readExternal(PofReader reader) throws IOException {
-		System.out.println("reader:" + reader);
-		k1 = reader.readInt(0);
-		k2 = reader.readString(1);
-		k3 = reader.readShort(2);
-		k4 = reader.readLong(3);
-		k5 = reader.readDouble(4);
-		k6 = reader.readBoolean(5);
-		k7 = (Integer) reader.readObject(6);
-		k8 = (Short) reader.readObject(7);
-		k9 = (Long) reader.readObject(8);
-		k10 = (Double) reader.readObject(9);
-		k11 = (Boolean) reader.readObject(10);
-	}
-
-	public void writeExternal(PofWriter writer) throws IOException {
-		System.out.println("writer:" + writer);
-		writer.writeInt(0, k1);
-		writer.writeString(1, k2);
-		writer.writeShort(2, k3);
-		writer.writeLong(3, k4);
-		writer.writeDouble(4, k5);
-		writer.writeBoolean(5, k6);
-		writer.writeObject(6, k7);
-		writer.writeObject(7, k8);
-		writer.writeObject(8, k9);
-		writer.writeObject(9, k10);
-		writer.writeObject(10, k11);
 	}
 
 	@Override
