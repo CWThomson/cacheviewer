@@ -1,0 +1,25 @@
+	---------------
+	Command Line Demo
+	---------------
+	Chris Thomson
+	---------------
+	2011-06-02
+	---------------
+	
+Command Line Demo
+
+	To populate the cache with dummy stock prices and extract a price from the cache
+	
+		[[1]] <<<java -cp "target\sibyl-0.0.1-SNAPSHOT.jar;lib\log4j-1.2.16.jar" uk.co.christhomson.sibyl.commandline.CacheViewerDemo TEST_PRICE_CACHE uk.co.christhomson.sibyl.sample.objects.InstrumentPriceKey>>>
+		
++---------------------------------------------------------------------------------------+
+Specifiy the value for field: ticker ( java.lang.String ) ?
+VOD.L
+Specifiy the value for field: date ( java.util.Date ) [yyyy-MM-dd] ?
+2010-01-04
+Specifiy the value for field: source ( uk.co.christhomson.sibyl.sample.objects.PriceSource ) [REUTERS,BLOOMBERG,UNKNOWN] ?
+REUTERS
+{ticker=VOD.L, source=REUTERS, date=2010-01-04}
+Result:
+InstrumentPrice [price=192.66930578520459]
++---------------------------------------------------------------------------------------+

@@ -43,6 +43,11 @@ public class CacheViewer {
 			ClassNotFoundException, InstantiationException,
 			IllegalAccessException, NoSuchFieldException,
 			FileNotFoundException, IOException, CacheException, ParseException {
+		run(args);
+	}
+	
+	public static void run(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException, SecurityException, CacheException, NoSuchFieldException, ParseException {
+		
 		if (!(args.length == 3 || args.length == 2)) {
 			usage();
 			System.exit(0);
@@ -51,7 +56,8 @@ public class CacheViewer {
 		String cacheName = args[0];
 		String className = args[1];
 		
-		CacheConnector connector = ConnectorBuilder.getConnector();
+		String connectorName = System.getProperty("sibyl.connector");
+		CacheConnector connector = ConnectorBuilder.getConnector(connectorName);
 		
 		Properties properties = null;
 		

@@ -6,7 +6,19 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Sibyl - Cache Viewer</name>
-
+	<inceptionYear>2011</inceptionYear>
+	<licenses>
+		<license>
+			<name>GNU LESSER GENERAL PUBLIC LICENSE</name>
+			<url>http://www.gnu.org/licenses/lgpl-3.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+		<license>
+			<name>GNU GENERAL PUBLIC LICENSE</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 	<dependencies>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -50,9 +62,12 @@
 		</dependency>
 
 	</dependencies>
-	<url>www.chris-thomson.co.uk/sibyl</url>
+	<description>Data within a modern day caching systems such as Oracle Coherence and Gigaspaces is difficult to extract on an adhoc basis for debugging purposes. This tool will dynamically construct an object representing the key of a data element and display the matching value.</description>
+	<url>sibyl.sourceforge.net</url>
 	<scm>
-		<connection>scm:https://sibyl.svn.sourceforge.net/svnroot/sibyl</connection>
+		<connection>scm:svn:https://sibyl.svn.sourceforge.net/svnroot/sibyl</connection>
+		<developerConnection>scm:svn:https://sibyl.svn.sourceforge.net/svnroot/sibyl</developerConnection>
+		<url>http://sibyl.svn.sourceforge.net/viewvc/sibyl/</url>
 	</scm>
 	<organization>
 		<name>Chris Thomson Enterprises</name>
@@ -208,6 +223,46 @@
 					</formats>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changes-plugin</artifactId>
+				<inherited>false</inherited>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>changes-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+				<configuration>
+					<issueLinkTemplate>http://sourceforge.net/support/tracker.php?aid=%ISSUE%</issueLinkTemplate>
+					<issueManagementSystems>
+						<issueManagementSystem>changes.xml</issueManagementSystem>
+						<issueManagementSystem>Sourceforge</issueManagementSystem>
+					</issueManagementSystems>
+
+					<smtpHost>mail.yourhost.com</smtpHost>
+					<smtpPort implementation="java.lang.Integer">25</smtpPort>
+					<toAddresses>
+						<toAddress implementation="java.lang.String">chris@chris-thomson.co.uk</toAddress>
+					</toAddresses>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changelog-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.8.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.1</version>
+			</plugin>
 		</plugins>
 	</reporting>
 	<distributionManagement>
@@ -216,6 +271,10 @@
 			<url>scp://www.chris-thomson.co.uk/www/docs/project/</url>
 		</site>
 	</distributionManagement>
+	<issueManagement>
+		<system>SourceForge</system>
+		<url>http://sourceforge.net/tracker/?group_id=548677</url>
+	</issueManagement>
 	<developers>
 		<developer>
 			<id>chris</id>

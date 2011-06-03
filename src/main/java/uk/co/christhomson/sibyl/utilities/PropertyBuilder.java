@@ -23,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -107,7 +108,10 @@ public class PropertyBuilder {
 		System.out.println("Generating properties for " + cls.getName());
 		for (Field fld : cls.getDeclaredFields()) {
 			Class<?> fldType = fld.getType();
-			if (fldType.isPrimitive() ||
+			if ((fld.getModifiers() & Modifier.FINAL) == Modifier.FINAL) {
+				// ignore final variables
+			}
+			else if (fldType.isPrimitive() ||
 					fldType.equals(Integer.class) ||
 					fldType.equals(Double.class) ||
 					fldType.equals(Long.class) ||

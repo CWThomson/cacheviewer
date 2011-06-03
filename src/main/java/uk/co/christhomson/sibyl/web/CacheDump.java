@@ -49,7 +49,7 @@ public class CacheDump extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		
-		String connectorName = System.getProperty("connector");
+		String connectorName = System.getProperty("sibyl.connector");
 		try {
 			connector = ConnectorBuilder.getConnector(connectorName);
 		} catch (Exception ex) {

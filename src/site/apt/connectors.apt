@@ -1,0 +1,41 @@
+	----------------
+	Cache Connectors
+	----------------
+	Chris Thomson
+	---------------
+	2011-06-02
+	---------------
+
+Connector Achitecture
+
+	Sibyl is designed to be able to support multiple caching providers. Sibyl uses the concept of "connectors" 
+	or adapters to provide a common interface to these different systems. Connectors have been created for:-
+	
+		* Java HashMap - <<<uk.co.christhomson.sibyl.cache.connectors.HashMapConnector>>>
+		
+		* Oracle Coherence - <<<uk.co.christhomson.sibyl.cache.connectors.CoherenceConnector>>>
+		
+		* Gigaspaces - <<<uk.co.christhomson.sibyl.cache.connectors.GigaspacesConnector>>>
+		
+	To switch between the different connectors, simply set the <<<sibyl.connector>>> system property, 
+	
+	e.g. 
+		<<<-Dsibyl.connector=uk.co.christhomson.sibyl.cache.connectors.HashMapConnector>>>
+		
+
+* Creating a Connector
+
+	When creating a new connector, you simply need to implement the 
+	<<<uk.co.christhomson.sibyl.cache.connectors.CacheConnector>>> interface. It has the following methods
+	which are used to extract and insert data into the cache as well as retrieving some meta
+	data about the cache system itself.
+	
++---------------------------------------------------------------------------------------+
+ public Object get(String cacheName, Object key) throws CacheException;
+ public Map<?,?> getAll(String cacheName) throws CacheException;
+ public void put(String cacheName, Object key, Object value) throws CacheException;
+ public void putAll(String cacheName, Map<?,?> data) throws CacheException;
+ public void clear(String cacheName) throws CacheException;
+ public void clearAll() throws CacheException;
+ public int getCacheSize(String cacheName) throws CacheException;
++---------------------------------------------------------------------------------------+

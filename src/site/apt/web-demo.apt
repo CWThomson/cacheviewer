@@ -1,0 +1,31 @@
+	---------------
+	Web Client Demo
+	---------------
+	Chris Thomson
+	---------------
+	2011-06-02
+	---------------
+	
+Web Client Demo
+
+	To populate the cache with dummy stock prices and extract a price from the cache
+	
+		[[1]] Copy sibyl.war to deploy directory of JBoss server
+		
+		[[2]] Start JBoss
+		
+		[[3]] Load demo data into cache by going to: http://localhost:8080/sibyl/BulkLoader
+		
+		[[4]] Goto http://localhost:8080/sibyl/Extractor
+		
+		[[5]] Enter "uk.co.christhomson.sibyl.sample.objects.InstrumentPriceKey" in the "Class Search" field
+		
+		[[6]] Enter "TEST_PRICE_CACHE" in the "Cache Name" field
+		
+		[[7]] Enter "VOD.L" in the ticker field
+		
+		[[8]] Enter "2010-01-04" in the date field
+		
+		[[9]] Select "Reuters" in the price source field
+		
+		[[10]] Press "Extract" and you should see the results of the extraction from the cache

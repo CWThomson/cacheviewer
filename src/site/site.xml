@@ -1,0 +1,14 @@
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+	<body>
+		<menu ref="reports"/>
+		<menu name="Sibyl">
+			<item name="Connector Achitecture" href="connectors.html" />
+		</menu>
+		<menu name="Demo">
+			<item name="Web Client Demo" href="web-demo.html" />
+			<item name="Command Line Demo" href="command-line-demo.html" />
+		</menu>
+	</body>
+</project>

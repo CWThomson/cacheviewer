@@ -17,17 +17,22 @@
 	Copyright (C) 2011 Chris Thomson
 */
 
-package uk.co.christhomson.sibyl.cache.connectors;
+package uk.co.christhomson.sibyl.commandline;
 
-public class ConnectorBuilder {
+import uk.co.christhomson.sibyl.cache.connectors.CacheConnector;
+import uk.co.christhomson.sibyl.cache.connectors.ConnectorBuilder;
+import uk.co.christhomson.sibyl.cache.connectors.HashMapConnector;
+import uk.co.christhomson.sibyl.sample.loader.InstrumentPriceBulkLoader;
 
-	public static CacheConnector getConnector(String className) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		if (className == null) {
-			className = HashMapConnector.class.getName();
-		}
+public class CacheViewerDemo {
+	public static void main(String[] args) throws Exception {
+		String cacheName = args[0];
+		String connectorName = HashMapConnector.class.getName();
 		
-		Class<?> cls = Class.forName(className);
-		CacheConnector connector = (CacheConnector) cls.newInstance();
-		return connector;
+		CacheConnector connector = ConnectorBuilder.getConnector(connectorName);
+		InstrumentPriceBulkLoader loader = new InstrumentPriceBulkLoader(connector);
+		loader.loadAll(cacheName);
+		
+		CacheViewer.run(args);
 	}
 }
