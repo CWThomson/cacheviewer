@@ -84,6 +84,7 @@
 									</ul>
 									<h2><a href="tutorial-web.html">Web Tutorial</a></h2>
 									<h2><a href="tutorial-cl.html">Command Line Tutorial</a></h2>
+									<h2><a href="license.html">License</a></h2>
 								</div>
 								<div style="clear: both;"></div>
 							</div>
@@ -93,6 +94,7 @@
 				</div>
 				<div id="footer">
 					<p>Copyright (c) 2011 www.chris-thomson.co.uk. All rights reserved. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+					<p><a href="http://sourceforge.net/donate/index.php?group_id=548677"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a></p>
 				</div>
 			</body>
 		</html>
