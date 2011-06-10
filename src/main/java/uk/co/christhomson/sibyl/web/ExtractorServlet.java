@@ -15,11 +15,10 @@
     along with Sibyl.  If not, see <http://www.gnu.org/licenses/>.
 
 	Copyright (C) 2011 Chris Thomson
-*/
+ */
 
 package uk.co.christhomson.sibyl.web;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Collection;
@@ -54,8 +53,8 @@ import uk.co.christhomson.xsl.utilities.XsltHelper;
 
 /*
  ExtractorServlet
-  Servlet providing user inferface for extracting data from cache
-  using XSL templates to display HTML
+ Servlet providing user inferface for extracting data from cache
+ using XSL templates to display HTML
 
  Copyright (C) 2011 Chris Thomson
  */
@@ -72,6 +71,8 @@ public class ExtractorServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		
+		System.setProperty("javax.xml.transform.TransformerFactory", "net.sf.saxon.TransformerFactoryImpl");
+
 		String connectorName = System.getProperty("sibyl.connector");
 		try {
 			connector = ConnectorBuilder.getConnector(connectorName);
@@ -84,11 +85,10 @@ public class ExtractorServlet extends HttpServlet {
 	}
 
 	private void reloadXslt(ServletConfig config) throws ServletException {
+		String xsl = "xsl/extractor.xsl";
 		try {
-			xsltHelper = new XsltHelper(config.getServletContext().getRealPath(
-					"/")
-					+ "/xsl/extractor.xsl");
-		} catch (FileNotFoundException e) {
+			xsltHelper = new XsltHelper(xsl);
+		} catch (IOException e) {
 			throw new ServletException(e);
 		}
 	}
@@ -144,13 +144,7 @@ public class ExtractorServlet extends HttpServlet {
 			InstantiationException, IllegalAccessException,
 			NoSuchFieldException, CacheException, ParseException {
 
-//		Map<String, Object> objParams = PropertyBuilder.processProperties(params);
-
-//		CacheConnector extractor = ConnectorBuilder.getConnector(connectorName);
-//		Object obj = extractor.extract(params.get("className")[0],
-//				PropertyBuilder.processProperties(objParams));
-		Object result = connector.get(cacheName,key);
-//		System.out.println("ResultClass:" + obj.getClass().getName());
+		Object result = connector.get(cacheName, key);
 		return result;
 	}
 
@@ -161,9 +155,8 @@ public class ExtractorServlet extends HttpServlet {
 	}
 
 	public String extract(String className, Map<String, String[]> params,
-			Collection<String> classHistory) throws IOException, TransformerException { 
-//	throws ClassNotFoundException, SecurityException, InstantiationException, IllegalAccessException, NoSuchFieldException, ParseException, IOException, TransformerException {
-
+			Collection<String> classHistory) throws IOException,
+			TransformerException {
 		Map<String, String> xslParams = null;
 		Element msgsXml = new Element("Messages");
 		Element errorsXml = new Element("Errors");
@@ -173,28 +166,27 @@ public class ExtractorServlet extends HttpServlet {
 		Element resultXml = null;
 
 		Map<String, Object> propMap = PropertyBuilder.processProperties(params);
-		
+
 		if (className != null) {
 			try {
 				Class cls = ClassBuilder.getClassFromName(className, false);
 				ObjectBuilder objBuilder = new ObjectBuilder(cls, propMap);
 				Object key = objBuilder.build();
-				
+
 				keyXml = generateXmlKey(cls, key, errorsXml);
-	
-				if (keyXml != null
-						&& keyXml.getChildren().size() > 0) {
+
+				if (keyXml != null && keyXml.getChildren().size() > 0) {
 					cacheXml = new Element("Cache");
 					if (params.containsKey("cacheName")) {
-						cacheXml.setAttribute("name", params.get("cacheName")[0]);
+						cacheXml.setAttribute("name",
+								params.get("cacheName")[0]);
 					}
 				}
-	
+
 				if (params.get("extract") != null) {
 					try {
 						String cacheName = getCacheName(params);
-						resultXml = generateResult(cacheName, key,
-								errorsXml);
+						resultXml = generateResult(cacheName, key, errorsXml);
 					} catch (InvalidCacheNameException e) {
 						Element error = new Element("Error");
 						error
@@ -202,13 +194,13 @@ public class ExtractorServlet extends HttpServlet {
 						errorsXml.addContent(error);
 					}
 				}
-	
+
 				xslParams = new HashMap<String, String>();
 				xslParams.put("className", className);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-				addError(errorsXml, e.getClass().getName() + ":" + e.getMessage());
+				addError(errorsXml, e.getClass().getName() + ":"
+						+ e.getMessage());
 			}
 		} else {
 			Element msg = new Element("Message");
@@ -245,8 +237,6 @@ public class ExtractorServlet extends HttpServlet {
 			Element objectXml = new XmlObjectBuilder(cls, key)
 					.createXmlObject();
 			keyXml.addContent(objectXml);
-//		} catch (ClassNotFoundException e) {
-//			addError(errorsXml, "Class Not Found: " + e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 			addError(errorsXml, e.getClass().getName() + ":" + e.getMessage());
@@ -254,7 +244,7 @@ public class ExtractorServlet extends HttpServlet {
 		return keyXml;
 	}
 
-	private Element generateResult(String cacheName, //String className,
+	private Element generateResult(String cacheName, // String className,
 			Object key, Element errorsXml) {
 		Element resultElem = null;
 
@@ -298,7 +288,8 @@ public class ExtractorServlet extends HttpServlet {
 		for (String className : classHistory) {
 			Element classNameElem = new Element("Class");
 			classNameElem.setAttribute("name", className);
-			classNameElem.setAttribute("shortname", ClassBuilder.getShortType(className));
+			classNameElem.setAttribute("shortname", ClassBuilder
+					.getShortType(className));
 			elem.addContent(classNameElem);
 		}
 

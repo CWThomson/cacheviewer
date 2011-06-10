@@ -37,7 +37,7 @@ public class TestXsltHelper {
 	private XsltHelper xslHelper = null;
 	
 	@Before
-	public void setup() throws FileNotFoundException, ServletException {
+	public void setup() throws IOException, ServletException {
 		String xslFile = "src/main/webapp/xsl/extractor.xsl";
 		xslHelper = new XsltHelper(xslFile);
 		
