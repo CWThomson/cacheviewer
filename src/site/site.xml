@@ -9,6 +9,7 @@
 		<menu name="Demo">
 			<item name="Web Client Demo" href="web-demo.html" />
 			<item name="Command Line Demo" href="command-line-demo.html" />
+			<item name="Google App Engine Live Demo" href="google-app-engine.html" />			
 		</menu>
 	</body>
 </project>
