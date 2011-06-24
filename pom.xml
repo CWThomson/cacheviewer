@@ -164,29 +164,6 @@
 					<stopKey>foo</stopKey>
 					<stopPort>9999</stopPort>
 					<systemProperties>
-						<systemProperty>
-							<name>tangosol.coherence.log</name>
-							<value>stdout</value>
-						</systemProperty>
-						<!--
-							systemProperty> <name>tangosol.pof.enabled</name>
-							<value>true</value> </systemProperty> <systemProperty>
-							<name>tangosol.pof.config</name>
-							<value>src/main/resources/viewer-pof-config.xml</value>
-							</systemProperty
-						-->
-						<systemProperty>
-							<name>tangosol.coherence.distributed.threads</name>
-							<value>5</value>
-						</systemProperty>
-						<systemProperty>
-							<name>tangosol.coherence.cacheconfig</name>
-							<value>src/main/resources/viewer-cache-config.xml</value>
-						</systemProperty>
-						<systemProperty>
-							<name>tangosol.coherence.guard.timeout</name>
-							<value>0</value>
-						</systemProperty>
 					</systemProperties>
 				</configuration>
 				<executions>
@@ -278,10 +255,11 @@
 	</reporting>
 	<distributionManagement>
 		<site>
-			<id>www.chris-thomson.co.uk</id>
-			<url>scp://www.chris-thomson.co.uk/www/docs/project/</url>
+			<id>sibyl.sf.net</id>
+			<url>scp://shell.sourceforge.net/home/project-web/sibyl/htdocs</url>
 		</site>
 	</distributionManagement>
+
 	<issueManagement>
 		<system>SourceForge</system>
 		<url>http://sourceforge.net/tracker/?group_id=548677</url>

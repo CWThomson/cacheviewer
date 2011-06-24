@@ -11,6 +11,11 @@
 	</servlet>
 	
     <servlet>
+		<servlet-name>Query</servlet-name>
+		<servlet-class>uk.co.christhomson.sibyl.web.QueryServlet</servlet-class>
+	</servlet>
+	
+    <servlet>
 		<servlet-name>BulkLoader</servlet-name>
 		<servlet-class>uk.co.christhomson.sibyl.web.BulkLoader</servlet-class>
 	</servlet>
@@ -23,6 +28,11 @@
 	<servlet-mapping>
 		<servlet-name>Extractor</servlet-name>
 		<url-pattern>/Extractor</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Query</servlet-name>
+		<url-pattern>/Query</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
