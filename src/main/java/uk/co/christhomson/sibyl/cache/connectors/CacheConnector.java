@@ -34,5 +34,6 @@ public interface CacheConnector {
 	public void clearAll() throws CacheException;
 	
 	public int getCacheSize(String cacheName) throws CacheException;
-
+	
+	public Map<?, ?> query(String cacheName, String query) throws CacheException;
 }

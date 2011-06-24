@@ -33,6 +33,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
@@ -53,24 +54,33 @@ public class XsltHelper {
 	private Templates cachedXslt;
 	private Transformer transformer;
 
-	public XsltHelper(String xslFile) throws ServletException, FileNotFoundException {
-		this(new FileInputStream(xslFile));
+	public XsltHelper(String xslFile, URIResolver uriResolver) throws ServletException, FileNotFoundException {
+		loadTemplate(xslFile, uriResolver);
 	}
 
-	public XsltHelper(InputStream is) throws ServletException, FileNotFoundException {
-		loadTemplate(is);
+	public XsltHelper(InputStream is, URIResolver uriResolver) throws ServletException, FileNotFoundException {
+		loadTemplate(is,uriResolver);
 	}
-	
-	public void loadTemplate(InputStream is) throws ServletException {
+
+	public void loadTemplate(InputStream is, URIResolver uriResolver) throws ServletException {
 		StreamSource xsltSource;
 		
 		try {
+			if (uriResolver != null) {
+				tFactory.setURIResolver(uriResolver);
+			}
+			
 			xsltSource = new StreamSource(is);
 			cachedXslt = tFactory.newTemplates(xsltSource);
+			
 			transformer = cachedXslt.newTransformer();
 		} catch (TransformerConfigurationException e) {
 			throw new ServletException(e.getMessage(),e);
 		}
+	}
+
+	public void loadTemplate(String xslFile, URIResolver uriResolver) throws ServletException, FileNotFoundException {
+		loadTemplate(new FileInputStream(xslFile), uriResolver);
 	}
 
 	public String processXml(String xmlFile) throws TransformerException, JDOMException, IOException {

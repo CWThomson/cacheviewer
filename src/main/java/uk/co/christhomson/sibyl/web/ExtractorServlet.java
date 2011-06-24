@@ -29,7 +29,6 @@ import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,12 +43,8 @@ import org.jdom.output.XMLOutputter;
 import uk.co.christhomson.reflection.builders.ClassBuilder;
 import uk.co.christhomson.reflection.builders.ObjectBuilder;
 import uk.co.christhomson.reflection.builders.XmlObjectBuilder;
-import uk.co.christhomson.sibyl.cache.connectors.CacheConnector;
-import uk.co.christhomson.sibyl.cache.connectors.ConnectorBuilder;
 import uk.co.christhomson.sibyl.exception.CacheException;
-import uk.co.christhomson.sibyl.exception.InvalidCacheNameException;
 import uk.co.christhomson.sibyl.utilities.PropertyBuilder;
-import uk.co.christhomson.xsl.utilities.XsltHelper;
 
 /*
  ExtractorServlet
@@ -58,65 +53,35 @@ import uk.co.christhomson.xsl.utilities.XsltHelper;
 
  Copyright (C) 2011 Chris Thomson
  */
-public class ExtractorServlet extends HttpServlet {
+public class ExtractorServlet extends SibylXslServlet {
 
 	private static final long serialVersionUID = 1746417206634639979L;
 
 	private static final Logger log = Logger.getLogger(ExtractorServlet.class);
 
-	private XsltHelper xsltHelper = null;
-	
-	private CacheConnector connector = null;
+	@Override
+	public String getXsl(ServletConfig config) {
+		String xsl = "extractor.xsl";
+		return xsl;
+	}
 
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
+	@Override
+	public String execute(Map<String, String[]> params, HttpSession session)
+			throws TransformerException, IOException {
 		
-		System.setProperty("javax.xml.transform.TransformerFactory", "net.sf.saxon.TransformerFactoryImpl");
-
-		String connectorName = System.getProperty("sibyl.connector");
-		try {
-			connector = ConnectorBuilder.getConnector(connectorName);
-		}
-		catch (Exception ex) {
-			throw new ServletException(ex);
-		}
-
-		reloadXslt(config);
-	}
-
-	private void reloadXslt(ServletConfig config) throws ServletException {
-		String xsl = "xsl/extractor.xsl";
-		try {
-			xsltHelper = new XsltHelper(xsl);
-		} catch (IOException e) {
-			throw new ServletException(e);
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-
-		reloadXslt(this.getServletConfig());
-
-		String className = req.getParameter("className");
-
-		HttpSession session = req.getSession(true);
+		String className = getClassName(params);
 		Set<String> classHistory = addClassToHistory(session, className);
 
-		Map<String, String[]> params = (Map<String, String[]>) req
-				.getParameterMap();
+		String output = extract(className, params, classHistory);
+		return output;
+	}
 
-		try {
-			String output = extract(className, params, classHistory);
-
-			resp.getOutputStream().write(output.getBytes());
-
-		} catch (TransformerException e) {
-			throw new ServletException(e.getMessage(), e);
-		} catch (IllegalArgumentException e) {
-			throw new ServletException(e.getMessage(), e);
+	private String getClassName(Map<String, String[]> params) {
+		String[] classNames = params.get("className");
+		if (classNames != null && classNames.length > 0) {
+			return classNames[0];
 		}
+		return null;
 	}
 
 	private Set<String> addClassToHistory(HttpSession session, String className) {
@@ -169,7 +134,7 @@ public class ExtractorServlet extends HttpServlet {
 
 		if (className != null) {
 			try {
-				Class cls = ClassBuilder.getClassFromName(className, false);
+				Class<?> cls = ClassBuilder.getClassFromName(className, false);
 				ObjectBuilder objBuilder = new ObjectBuilder(cls, propMap);
 				Object key = objBuilder.build();
 
@@ -184,14 +149,9 @@ public class ExtractorServlet extends HttpServlet {
 				}
 
 				if (params.get("extract") != null) {
-					try {
-						String cacheName = getCacheName(params);
+					String cacheName = getCacheName(params,errorsXml );
+					if (cacheName != null) {
 						resultXml = generateResult(cacheName, key, errorsXml);
-					} catch (InvalidCacheNameException e) {
-						Element error = new Element("Error");
-						error
-								.setText("Please enter a cache name to begin the extraction from the cache");
-						errorsXml.addContent(error);
 					}
 				}
 
@@ -219,18 +179,7 @@ public class ExtractorServlet extends HttpServlet {
 		return output;
 	}
 
-	private String getCacheName(Map<String, String[]> params)
-			throws InvalidCacheNameException {
-		String[] cacheNameArr = params.get("cacheName");
-		if (cacheNameArr == null || cacheNameArr.length == 0) {
-			throw new InvalidCacheNameException(
-					"No cache name has been specified");
-		}
-
-		return params.get("cacheName")[0];
-	}
-
-	private Element generateXmlKey(Class cls, Object key, Element errorsXml) {
+	private Element generateXmlKey(Class<?> cls, Object key, Element errorsXml) {
 		Element keyXml = new Element("Key");
 
 		try {
@@ -274,12 +223,6 @@ public class ExtractorServlet extends HttpServlet {
 		}
 
 		return resultElem;
-	}
-
-	private void addError(Element errorsXml, String msg) {
-		Element error = new Element("Error");
-		error.setText(msg);
-		errorsXml.addContent(error);
 	}
 
 	private Element generateClassHistory(Collection<String> classHistory) {

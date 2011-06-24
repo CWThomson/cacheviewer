@@ -19,10 +19,14 @@
 
 package uk.co.christhomson.sibyl.cache.connectors;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import uk.co.christhomson.sibyl.exception.CacheException;
+import uk.co.christhomson.sibyl.sample.objects.InstrumentPrice;
+import uk.co.christhomson.sibyl.sample.objects.InstrumentPriceKey;
+import uk.co.christhomson.sibyl.sample.objects.PriceSource;
 
 /*
  HashMapConnector
@@ -78,7 +82,15 @@ public class HashMapConnector implements CacheConnector {
 	}
 
 	public int getCacheSize(String cacheName) throws CacheException {
-		// TODO Auto-generated method stub
-		return 0;
+		return getCache(cacheName).size();
+	}
+
+	public Map<?,?> query(String cacheName, String query)
+			throws CacheException {
+		Map<InstrumentPriceKey, InstrumentPrice> results = new HashMap<InstrumentPriceKey,InstrumentPrice>();
+		results.put(new InstrumentPriceKey("VOD.L",new Date(),PriceSource.BLOOMBERG),new InstrumentPrice(10));
+		results.put(new InstrumentPriceKey("BP.L",new Date(),PriceSource.BLOOMBERG),new InstrumentPrice(20));
+		results.put(new InstrumentPriceKey("RBS.L",new Date(),PriceSource.BLOOMBERG),new InstrumentPrice(30));
+		return results;
 	}
 }
