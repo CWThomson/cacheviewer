@@ -30,7 +30,6 @@ import org.jdom.output.XMLOutputter;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.co.christhomson.reflection.builders.XmlObjectBuilder;
 import uk.co.christhomson.sibyl.exception.CacheException;
 import uk.co.christhomson.sibyl.sample.objects.TestKey3;
 import uk.co.christhomson.sibyl.sample.objects.TestKey5;

@@ -21,7 +21,6 @@ package uk.co.christhomson.xsl.utilities;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -32,14 +31,17 @@ import org.jdom.JDOMException;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.co.christhomson.sibyl.web.ServletContextResolver;
+
 public class TestXsltHelper {
 	
 	private XsltHelper xslHelper = null;
 	
 	@Before
 	public void setup() throws IOException, ServletException {
-		String xslFile = "src/main/webapp/xsl/extractor.xsl";
-		xslHelper = new XsltHelper(xslFile);
+//		String xslFile = "src/main/webapp/xsl/extractor.xsl";
+		String xslFile = "src/main/resources/uk/co/christhomson/sibyl/web/extractor.xsl";
+		xslHelper = new XsltHelper(xslFile,new ServletContextResolver());
 		
 		String outputDir = "target/xsl/output";
 		File dir = new File(outputDir);

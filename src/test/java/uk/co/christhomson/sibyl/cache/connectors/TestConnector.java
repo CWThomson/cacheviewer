@@ -111,5 +111,9 @@ public abstract class TestConnector {
 	public void testClearAll() throws CacheException {
 		connector.clearAll();
 	}
-	
+
+	@Test
+	public void testQueryKeys() throws CacheException {
+		
+	}
 }

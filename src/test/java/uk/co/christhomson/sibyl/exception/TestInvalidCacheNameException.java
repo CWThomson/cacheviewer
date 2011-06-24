@@ -21,8 +21,6 @@ package uk.co.christhomson.sibyl.exception;
 
 import org.junit.Test;
 
-import uk.co.christhomson.sibyl.exception.InvalidCacheNameException;
-
 public class TestInvalidCacheNameException {
 	@Test
 	public void test1() {

@@ -31,7 +31,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import uk.co.christhomson.reflection.builders.ObjectBuilder;
 import uk.co.christhomson.sibyl.sample.objects.PriceSource;
 import uk.co.christhomson.sibyl.sample.objects.TestKey1;
 import uk.co.christhomson.sibyl.sample.objects.TestKey2;

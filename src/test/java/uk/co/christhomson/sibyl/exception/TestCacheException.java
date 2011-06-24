@@ -21,8 +21,6 @@ package uk.co.christhomson.sibyl.exception;
 
 import org.junit.Test;
 
-import uk.co.christhomson.sibyl.exception.CacheException;
-
 public class TestCacheException {
 	@Test
 	public void test1() {

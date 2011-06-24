@@ -28,9 +28,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.co.christhomson.sibyl.cache.connectors.CacheConnector;
-import uk.co.christhomson.sibyl.cache.connectors.ConnectorBuilder;
-import uk.co.christhomson.sibyl.cache.connectors.HashMapConnector;
 import uk.co.christhomson.sibyl.exception.CacheException;
 import uk.co.christhomson.sibyl.sample.objects.TestKey2;
 import uk.co.christhomson.sibyl.sample.objects.TestKey3;

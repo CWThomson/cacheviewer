@@ -27,8 +27,6 @@ import java.util.Properties;
 
 import org.junit.Test;
 
-import uk.co.christhomson.sibyl.utilities.PropertyBuilder;
-
 public class TestPropertyBuilder {
 	@Test
 	public void test() {
