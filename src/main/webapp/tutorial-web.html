@@ -62,25 +62,42 @@
 					<img src="images/tutorial/results-tree.png"/>
 				</div>
 			</div>
+			
+			<div class="post">
+				<h2 class="title"><a name="Querying">Querying Cache</a></h2>
+				<div style="clear: both;">&nbsp;</div>
+				<div class="entry">
+					As an alternative to querying the cache by key, you can also use expression languages depending 
+					on the cache provider you are using. For the standard HashMapConnector, we use the Spring Expression
+					language (SpEL) syntax. An example of the this query is shown below. You will need to ensure the 
+					BulkLoader process has run. 
+					<br/>
+					<div><code>ticker == 'VOD.L' and source == T(uk.co.christhomson.sibyl.sample.objects.PriceSource).BLOOMBERG and date.equals(new java.text.SimpleDateFormat("yyyy-MM-dd").parse('2010-01-08'))</code></div>
+					<br/>
+				</div>
+			</div>
+			
+			
 		<div style="clear: both;">&nbsp;</div>
 		</div>
 		<!-- end #content -->
 		<div id="sidebar">
 			<h2><a href="index.html">Home</a></h2>
 			<h2><a href="Extractor">Extractor</a></h2>
-			<h2><a href="tutorial-web.html">Web Tutorial</a></h2>
-			<h2><a href="tutorial-cl.html">Command Line Tutorial</a></h2>
+			<h2><a href="Query">Query</a></h2>
 			<ul>
 				<li>
-					<h2>Topics</h2>
+					<h2><a href="tutorial-web.html">Web Tutorial</a></h2>
 					<ul>
 						<li><a href="#FindKeyClass">Find Key Class</a></li>
 						<li><a href="#ClassHistory">Class History</a></li>
 						<li><a href="#ExtractingData">Extracting Data</a></li>
 						<li><a href="#ViewingResults">Viewing Results</a></li>
+						<li><a href="#Querying">Querying Cache</a></li>
 					</ul>
 				</li>
 			</ul>
+			<h2><a href="tutorial-cl.html">Command Line Tutorial</a></h2>
 			<h2><a href="license.html">License</a></h2>
 		</div>
 		<!-- end #sidebar -->
