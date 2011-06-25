@@ -1,0 +1,36 @@
+	---------------
+	Sibyl Web Tutorial
+	---------------
+	Chris Thomson
+	---------------
+	2011-06-09
+	---------------
+	
+Sibyl Command Line Tutorial
+
+* Overview
+	
+	The command line tool is designed to allow you use the extraction facility in environments where there is no web server available to host the web application. The two tools work in similar ways and extract the same information. 
+
+[images/tutorial/class-search.png]
+
+* Creating a Property File
+		
+	A property file is used to "describe" the key object and allow the tool to construct a valid Java object through reflection. The property file should contain all the values for the attributes so when the object is re-hydrated, it should be identical to the key in the cache.
+					
+	For each field in the key object there needs to be a key-value pair in the property file. The key name should equal the field name and the value should equal the feild value. If the field value should be null, then don't include a key-value pair in the file.
+
+* Sample Properties File
+		
++---------------------------------------------------------------------------------------+
+<<<key1=value1>>>
+<<<key2=value2>>>
+<<<key3.subKey1=value3>>>
+<<<key4.subKey2.subKey3=value4>>>
++---------------------------------------------------------------------------------------+
+	
+* Property File Generation Tool
+		
+	Instead of creating a property file yourself, you can use a command line tool to generate it for you. Simply run:-
+					
+	<<<java -cp %CLASSPATH% uk.co.christhomson.sibyl.>>>

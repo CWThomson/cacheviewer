@@ -6,6 +6,10 @@
 		<menu name="Sibyl">
 			<item name="Connector Achitecture" href="connectors.html" />
 		</menu>
+		<menu name="Tutorials">
+			<item name="Web Tutorial" href="tutorial-web.html" />
+			<item name="Command Line Tutorial" href="tutorial-cl.html" />			
+		</menu>
 		<menu name="Demo">
 			<item name="Web Client Demo" href="web-demo.html" />
 			<item name="Command Line Demo" href="command-line-demo.html" />
