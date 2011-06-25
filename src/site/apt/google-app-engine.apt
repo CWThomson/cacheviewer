@@ -15,20 +15,24 @@ Google App Engine Live Demo
 	
 	To extract information, follow the instructions below:-
 	
-		[[1]] Click on the "Extractor" link on the right hand side
-		
-		[[2]] Enter "uk.co.christhomson.sibyl.sample.objects.InstrumentPriceKey" in the "Class Search" field
-		
-		[[3]] Enter "TEST_PRICE_CACHE" in the "Cache Name" field
-		
-		[[4]] Enter "VOD.L" in the ticker field
-		
-		[[5]] Enter "2010-01-04" in the date field
-		
-		[[6]] Select "Reuters" in the price source field
-		
-		[[7]] Press "Extract" and you should see the results of the extraction from the cache
-		
-		[[8]] If you don't see any results, goto the following link and repeat above steps
+		[[1]] Goto the following link to ensure that there are prices in the cache 
 		
 			{{http://sibylviewer.appspot.com/BulkLoader}}
+			
+		[[2]] Goto the following link 
+		
+			{{http://sibylviewer.appspot.com}}
+		
+		[[3]] Click on the "Extractor" link on the right hand side
+		
+		[[4]] Enter "uk.co.christhomson.sibyl.sample.objects.InstrumentPriceKey" in the "Class Search" field
+		
+		[[5]] Enter "TEST_PRICE_CACHE" in the "Cache Name" field
+		
+		[[6]] Enter "VOD.L" in the ticker field
+		
+		[[7]] Enter "2010-01-04" in the date field
+		
+		[[8]] Select "Reuters" in the price source field
+		
+		[[9]] Press "Extract" and you should see the results of the extraction from the cache
