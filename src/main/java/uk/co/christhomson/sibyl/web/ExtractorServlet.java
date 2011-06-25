@@ -84,6 +84,7 @@ public class ExtractorServlet extends SibylXslServlet {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Set<String> addClassToHistory(HttpSession session, String className) {
 		Set<String> classHistory = (Set<String>) session
 				.getAttribute("classHistory");

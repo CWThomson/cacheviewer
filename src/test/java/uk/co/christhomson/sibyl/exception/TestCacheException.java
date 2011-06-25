@@ -19,26 +19,32 @@
 
 package uk.co.christhomson.sibyl.exception;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 public class TestCacheException {
 	@Test
 	public void test1() {
 		CacheException ex = new CacheException();
+		assertNotNull(ex);
 	}
 	
 	@Test
 	public void test2() {
 		CacheException ex = new CacheException("TEST");
+		assertNotNull(ex);
 	}
 	
 	@Test
 	public void test3() {
 		CacheException ex = new CacheException(new Exception("TEST"));
+		assertNotNull(ex);
 	}
 	
 	@Test
 	public void test4() {
 		CacheException ex = new CacheException("TEST",new Exception("TEST"));
+		assertNotNull(ex);
 	}
 }

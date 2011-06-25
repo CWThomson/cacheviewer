@@ -39,7 +39,9 @@ public class ObjectBuilder {
 
 	private static final Logger log = Logger.getLogger(ObjectBuilder.class);
 
+	@SuppressWarnings("unchecked")
 	private Class cls = null;
+	
 	private Map<String, Object> properties = null;
 
 	public ObjectBuilder(String className, Map<String, Object> properties)
@@ -48,6 +50,7 @@ public class ObjectBuilder {
 				.getClassFromName(className)), properties);
 	}
 
+	@SuppressWarnings("unchecked")
 	public ObjectBuilder(Class cls, Map<String, Object> properties)
 			throws ClassNotFoundException {
 		this.cls = cls;
@@ -164,6 +167,7 @@ public class ObjectBuilder {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void setEnum(Object obj, Field field, Enum value) throws IllegalArgumentException, IllegalAccessException {
 		field.set(obj, value);
 	}

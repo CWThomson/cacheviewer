@@ -19,26 +19,32 @@
 
 package uk.co.christhomson.sibyl.exception;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 public class TestInvalidCacheNameException {
 	@Test
 	public void test1() {
 		InvalidCacheNameException ex = new InvalidCacheNameException();
+		assertNotNull(ex);
 	}
 	
 	@Test
 	public void test2() {
 		InvalidCacheNameException ex = new InvalidCacheNameException("TEST");
+		assertNotNull(ex);
 	}
 	
 	@Test
 	public void test3() {
 		InvalidCacheNameException ex = new InvalidCacheNameException(new Exception("TEST"));
+		assertNotNull(ex);
 	}
 	
 	@Test
 	public void test4() {
 		InvalidCacheNameException ex = new InvalidCacheNameException("TEST",new Exception("TEST"));
+		assertNotNull(ex);
 	}
 }
