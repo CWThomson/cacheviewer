@@ -35,13 +35,12 @@ import org.junit.Test;
 import uk.co.christhomson.sibyl.cache.connectors.CacheConnector;
 import uk.co.christhomson.sibyl.cache.connectors.ConnectorBuilder;
 import uk.co.christhomson.sibyl.cache.connectors.HashMapConnector;
-import uk.co.christhomson.sibyl.cache.connectors.TestCacheBase;
 import uk.co.christhomson.sibyl.exception.CacheException;
 import uk.co.christhomson.sibyl.sample.objects.InstrumentPrice;
 import uk.co.christhomson.sibyl.sample.objects.InstrumentPriceKey;
 import uk.co.christhomson.sibyl.sample.objects.PriceSource;
 
-public class TestInstrumentPriceBulkLoader extends TestCacheBase {
+public class TestInstrumentPriceBulkLoader {
 
 	private CacheConnector connector = null;
 	private String cacheName = "TEST_PRICE_CACHE";
@@ -49,12 +48,10 @@ public class TestInstrumentPriceBulkLoader extends TestCacheBase {
 	private String connectorName = HashMapConnector.class.getName();
 	
 	public TestInstrumentPriceBulkLoader() {
-		super(false);
 	}
 	
 	@Before
 	public void setup() throws Exception {
-		super.setup();
 		
 		connector = ConnectorBuilder.getConnector(connectorName);
 		connector.clearAll();
