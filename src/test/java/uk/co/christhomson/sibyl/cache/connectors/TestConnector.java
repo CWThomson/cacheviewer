@@ -48,6 +48,8 @@ public abstract class TestConnector {
 	private InstrumentPrice value = null;
 	private Map<InstrumentPriceKey,InstrumentPrice> data = null;
 	
+	public abstract String getQuery();
+	
 	@Before
 	public void setup() throws CacheException {
 		cacheName = "TEST_PRICE_CACHE";
@@ -113,7 +115,10 @@ public abstract class TestConnector {
 	}
 
 	@Test
-	public void testQueryKeys() throws CacheException {
-		
+	public void testQuery() throws ClassNotFoundException, InstantiationException, IllegalAccessException, CacheException {
+		String query = getQuery();
+		Map<?, ?> results = connector.query(cacheName, query);
+		System.out.println(results);
+		assertTrue(results.size() == 1);
 	}
 }
