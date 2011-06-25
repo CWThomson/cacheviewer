@@ -35,5 +35,6 @@ public interface CacheConnector {
 	
 	public int getCacheSize(String cacheName) throws CacheException;
 	
+	public String getQueryLanguageDescription();
 	public Map<?, ?> query(String cacheName, String query) throws CacheException;
 }

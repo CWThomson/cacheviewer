@@ -15,62 +15,64 @@
     along with Sibyl.  If not, see <http://www.gnu.org/licenses/>.
 
 	Copyright (C) 2011 Chris Thomson
-*/
+ */
 
 package uk.co.christhomson.sibyl.cache.connectors;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
+
 import uk.co.christhomson.sibyl.exception.CacheException;
-import uk.co.christhomson.sibyl.sample.objects.InstrumentPrice;
-import uk.co.christhomson.sibyl.sample.objects.InstrumentPriceKey;
-import uk.co.christhomson.sibyl.sample.objects.PriceSource;
 
 /*
  HashMapConnector
-  Connector to retrieve data from a static Map of Maps - this has no dependencies on external 
-  caching providers 
- 
+ Connector to retrieve data from a static Map of Maps - this has no dependencies on external 
+ caching providers 
+
  Copyright (C) 2011 Chris Thomson
  */
 public class HashMapConnector implements CacheConnector {
-	
-	public static Map<String,Map<Object,Object>> caches = new HashMap<String,Map<Object,Object>>();
-	
-	protected HashMapConnector() {}
-	
-	public Map<Object,Object> getCache(String cacheName) throws CacheException {
-		Map<Object,Object> cache = caches.get(cacheName);
+
+	public static Map<String, Map<Object, Object>> caches = new HashMap<String, Map<Object, Object>>();
+
+	protected HashMapConnector() {
+	}
+
+	public Map<Object, Object> getCache(String cacheName) throws CacheException {
+		Map<Object, Object> cache = caches.get(cacheName);
 		if (cache == null) {
-			cache = new HashMap<Object,Object>();
+			cache = new HashMap<Object, Object>();
 			caches.put(cacheName, cache);
 		}
-		
+
 		return cache;
 	}
 
 	public Object get(String cacheName, Object key) throws CacheException {
-		Map<Object,Object> cache = getCache(cacheName);
+		Map<Object, Object> cache = getCache(cacheName);
 		Object value = cache.get(key);
 		return value;
 	}
-	
-	public Map<?,?> getAll(String cacheName) throws CacheException {
+
+	public Map<?, ?> getAll(String cacheName) throws CacheException {
 		return getCache(cacheName);
 	}
 
-	public void putAll(String cacheName, Map<?, ?> data)
-			throws CacheException {
-		Map<Object,Object> cache = getCache(cacheName);
+	public void putAll(String cacheName, Map<?, ?> data) throws CacheException {
+		Map<Object, Object> cache = getCache(cacheName);
 		cache.putAll(data);
 	}
 
 	public void put(String cacheName, Object key, Object value)
 			throws CacheException {
-		Map<Object,Object> cache = getCache(cacheName);
-		cache.put(key,value);
+		Map<Object, Object> cache = getCache(cacheName);
+		cache.put(key, value);
 	}
 
 	public void clear(String cacheName) throws CacheException {
@@ -85,12 +87,29 @@ public class HashMapConnector implements CacheConnector {
 		return getCache(cacheName).size();
 	}
 
-	public Map<?,?> query(String cacheName, String query)
+	public Map<?, ?> query(String cacheName, String query)
 			throws CacheException {
-		Map<InstrumentPriceKey, InstrumentPrice> results = new HashMap<InstrumentPriceKey,InstrumentPrice>();
-		results.put(new InstrumentPriceKey("VOD.L",new Date(),PriceSource.BLOOMBERG),new InstrumentPrice(10));
-		results.put(new InstrumentPriceKey("BP.L",new Date(),PriceSource.BLOOMBERG),new InstrumentPrice(20));
-		results.put(new InstrumentPriceKey("RBS.L",new Date(),PriceSource.BLOOMBERG),new InstrumentPrice(30));
+		Map<Object, Object> results = new HashMap<Object, Object>();
+		Map<?, ?> data = getCache(cacheName);
+		
+		ExpressionParser parser = new SpelExpressionParser();
+		
+		for (Object key : data.keySet()) {
+			Object value = data.get(key);
+			EvaluationContext keyContext = new StandardEvaluationContext(key);
+			
+			Expression exp = parser.parseExpression(query);
+			boolean result = exp.getValue(keyContext, Boolean.class);
+			
+			if (result) {
+				results.put(key, value);
+			}
+		}
+		
 		return results;
+	}
+
+	public String getQueryLanguageDescription() {
+		return "To query the cache by keys, use Spring Expression Language (SpEL) syntax";
 	}
 }
