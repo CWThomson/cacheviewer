@@ -85,6 +85,9 @@ public class QueryServlet extends SibylXslServlet {
 					resultsXml = generateResult(cacheName, query, errorsXml);
 				}
 			}
+			else {
+				queryXml = getQueryXml(null);
+			}
 
 			xslParams = new HashMap<String, String>();
 		} catch (InvalidCacheNameException e) {
@@ -119,6 +122,11 @@ public class QueryServlet extends SibylXslServlet {
 		if (query != null) {
 			queryXml.setAttribute("query",query);
 		}
+		
+		Element language = new Element("Language");
+		language.setText(connector.getQueryLanguageDescription());
+		System.out.println(connector.getQueryLanguageDescription());
+		queryXml.addContent(language);
 				
 		return queryXml;
 	}
