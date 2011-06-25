@@ -33,7 +33,10 @@
 	
 		<h2 class="title">Query</h2>
 		<!-- div style="clear: both;">&nbsp;</div-->
+		
 		<div class="entry">
+			<xsl:value-of select="Language"/>
+			<br/>
 			<xsl:element name="textarea">
 				<xsl:attribute name="name">query</xsl:attribute>
 				<xsl:attribute name="cols">70</xsl:attribute>
