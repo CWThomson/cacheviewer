@@ -101,13 +101,9 @@
 							</ul>
 						</form>
 					</li>
-	
-					
 				</ul>
 			</xsl:if>
 			<h2><a href="Query">Query</a></h2>
-			<h2><a href="tutorial-web.html">Web Tutorial</a></h2>
-			<h2><a href="tutorial-cl.html">Command Line Tutorial</a></h2>
 			<h2><a href="license.html">License</a></h2>
 		</div>
 	</xsl:template>
