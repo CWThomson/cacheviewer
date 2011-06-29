@@ -13,15 +13,20 @@ Connector Achitecture
 	
 		* Java HashMap - <<<uk.co.christhomson.sibyl.cache.connectors.HashMapConnector>>>
 		
-		* Oracle Coherence - <<<uk.co.christhomson.sibyl.cache.connectors.CoherenceConnector>>>
+		* Oracle Coherence(*) - <<<uk.co.christhomson.sibyl.cache.connectors.CoherenceConnector>>>
 		
-		* Gigaspaces - <<<uk.co.christhomson.sibyl.cache.connectors.GigaspacesConnector>>>
+		* Gigaspaces(*) - <<<uk.co.christhomson.sibyl.cache.connectors.GigaspacesConnector>>>
+		
+	(*) Requires addittional libraries - sibyl-connectors.jar (http://sibyl-connectors.sf.net)
 		
 	To switch between the different connectors, simply set the <<<sibyl.connector>>> system property, 
 	
 	e.g. 
 		<<<-Dsibyl.connector=uk.co.christhomson.sibyl.cache.connectors.HashMapConnector>>>
-		
+	
+	If none is specified it will default to the HashMapConnector.
+	
+	You will also need to add any dependent jars to the servers classpath, e.g. coherence.jar
 
 * Creating a Connector
 
@@ -38,4 +43,6 @@ Connector Achitecture
  public void clear(String cacheName) throws CacheException;
  public void clearAll() throws CacheException;
  public int getCacheSize(String cacheName) throws CacheException;
+ public Map<?,?> query(String cacheName, String query) throws CacheException;
+ public String getQueryLanguageDescription();
 +---------------------------------------------------------------------------------------+
