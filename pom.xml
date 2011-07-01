@@ -78,7 +78,9 @@
 			<version>3.0.5.RELEASE</version>
 		</dependency>
 	</dependencies>
-	<description>Data within a modern day caching systems such as Oracle Coherence and Gigaspaces is difficult to extract on an adhoc basis for debugging purposes. This tool will dynamically construct an object representing the key of a data element and display the matching value.</description>
+	<description>Data within a modern day caching systems such as Oracle Coherence and Gigaspaces is difficult to extract on an adhoc basis for debugging purposes. This tool is designed to address these issues.
+
+This tool will dynamically construct an object representing the key of a data element and display the matching value or if the underlying caching system supports querying, it will allow you to run a query on the cache.</description>
 	<url>sibyl.sourceforge.net</url>
 	<scm>
 		<connection>scm:svn:https://sibyl.svn.sourceforge.net/svnroot/sibyl</connection>

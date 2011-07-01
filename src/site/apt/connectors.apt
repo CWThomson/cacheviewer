@@ -17,7 +17,7 @@ Connector Achitecture
 		
 		* Gigaspaces(*) - <<<uk.co.christhomson.sibyl.cache.connectors.GigaspacesConnector>>>
 		
-	(*) Requires addittional libraries - sibyl-connectors.jar (http://sibyl-connectors.sf.net)
+	(*) Requires addittional libraries - sibyl-connectors.jar (http://sibylconnectors.sf.net)
 		
 	To switch between the different connectors, simply set the <<<sibyl.connector>>> system property, 
 	

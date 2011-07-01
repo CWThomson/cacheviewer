@@ -4,6 +4,8 @@
 	<body>
 		<menu ref="reports"/>
 		<menu name="Sibyl">
+			<item name="Download" href="https://sourceforge.net/projects/sibyl/files/" />
+			<item name="Installation" href="installation.html" />
 			<item name="Connector Achitecture" href="connectors.html" />
 		</menu>
 		<menu name="Tutorials">

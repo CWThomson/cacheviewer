@@ -10,11 +10,7 @@ Web Client Demo
 
 	To populate the cache with dummy stock prices and extract a price from the cache
 	
-		[[1]] Copy sibyl.war to deploy directory of JBoss server
-		
-		[[2]] Start JBoss
-		
-		[[3]] Load demo data into cache by going to: http://localhost:8080/sibyl/BulkLoader
+		[[1]] Load demo data into cache by going to: http://localhost:8080/sibyl/BulkLoader
 		
 		[[4]] Goto http://localhost:8080/sibyl/Extractor
 		

@@ -1,0 +1,39 @@
+	---------------
+	Web Client Installation
+	---------------
+	Chris Thomson
+	---------------
+	2011-06-29
+	---------------
+	
+Web Client Installation
+
+	Installation is a relatively straight forward process and for the basic installation, it is simply the deployment of a standard war file. The war file can be deployed to any standard application server such as Tomcat, JBoss, Weblogic, etc. Installation may vary between servers.
+	
+	If you need to the optional connectors please follow these addittion instructions prior to installation. 
+
+* Tomcat
+
+	[[1]] Copy sibyl-<VERSION>.war to %TOMCAT_HOME%/webapps directory 
+	
+	[[2]] Start Tomcat
+	
+	[[3]] Goto http://localhost:8080/sibyl-<VERSION>/
+	  
+
+* JBoss
+	
+	[[1]] Copy sibyl-<VERSION>.war to %JBOSS_HOME%/servers/default/deploy directory 
+	
+	[[2]] Start JBoss - %JBOSS_HOME%/bin/run.bat or %JBOSS_HOME%/bin/run.sh
+	
+	[[3]] Goto http://localhost:8080/sibyl-<VERSION>/
+	  
+
+* Connector Setup
+
+	[[1]] Open sibyl-<VERSION>.war in a Unzipping application
+	
+	[[2]] Add sibyl-connectors-<VERSION>.jar to the WEB-INF/lib directory
+	
+	[[3]] Add -Dsibyl.connector=<ConnectorClassName> to startup arguments of server
