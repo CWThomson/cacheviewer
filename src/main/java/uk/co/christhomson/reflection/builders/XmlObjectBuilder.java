@@ -119,20 +119,25 @@ public class XmlObjectBuilder {
 			}
 		}
 		else if (!((cls.equals(Date.class) || cls.equals(String.class)) && isRoot)) {
-			for (Field field : cls.getDeclaredFields()) {
-				if ((field.getModifiers() & Modifier.STATIC) == 0) {
-					Object subObj = null;
-					if (obj != null) {
-						field.setAccessible(true);
-						subObj = field.get(obj);
-					}
-					
-					Element fieldElem = processField(field, subParentClasses,subObj);
-					if (fieldElem != null) {
-						elem.addContent(fieldElem);
+			do {
+				for (Field field : cls.getDeclaredFields()) {
+					if ((field.getModifiers() & Modifier.STATIC) == 0) {
+						Object subObj = null;
+						if (obj != null) {
+							field.setAccessible(true);
+							subObj = field.get(obj);
+						}
+						
+						Element fieldElem = processField(field, subParentClasses,subObj);
+						if (fieldElem != null) {
+							elem.addContent(fieldElem);
+						}
 					}
 				}
+				
+				cls = cls.getSuperclass();
 			}
+			while (!cls.equals(Object.class));
 		}
 		
 //		if (elem.getChildren().size() > 0) {

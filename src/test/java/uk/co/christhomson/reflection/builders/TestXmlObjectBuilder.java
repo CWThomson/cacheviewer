@@ -33,6 +33,7 @@ import org.junit.Test;
 import uk.co.christhomson.sibyl.exception.CacheException;
 import uk.co.christhomson.sibyl.sample.objects.TestKey3;
 import uk.co.christhomson.sibyl.sample.objects.TestKey5;
+import uk.co.christhomson.sibyl.sample.objects.TestKey6;
 
 public class TestXmlObjectBuilder {
 
@@ -101,4 +102,17 @@ public class TestXmlObjectBuilder {
 
 		xmlOutput.output(elem, System.out);
 	}
+	
+	@Test
+	public void test8() throws IllegalArgumentException, IllegalAccessException, IOException, CacheException {
+//		Date d1 = new GregorianCalendar(2011, Calendar.JANUARY, 1).getTime();
+//		Date d2 = new GregorianCalendar(2011, Calendar.JANUARY, 2).getTime();
+		TestKey6 key = new TestKey6("dsfdfd");
+		XmlObjectBuilder builder = new XmlObjectBuilder(TestKey6.class,key);
+		Element elem = builder.createXmlObject();
+
+		xmlOutput.output(elem, System.out);
+	}
+	
+	
 }
