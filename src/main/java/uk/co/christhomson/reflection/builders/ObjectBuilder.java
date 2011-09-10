@@ -55,7 +55,7 @@ public class ObjectBuilder {
 			throws ClassNotFoundException {
 		this.cls = cls;
 		this.properties = properties;
-		System.out.println(properties);
+		log.debug(properties);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -104,6 +104,8 @@ public class ObjectBuilder {
 
 //		processFields(obj);
 
+		log.debug(obj);
+		
 		return obj;
 	}
 
@@ -163,18 +165,23 @@ public class ObjectBuilder {
 					.get(fieldName);
 			ObjectBuilder builder = new ObjectBuilder(fieldType, subProperties);
 			Object subObj = builder.build();
+			
+			log.debug("Setting field:" + obj + "=" + subObj);
 			field.set(obj, subObj);
+			
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	private void setEnum(Object obj, Field field, Enum value) throws IllegalArgumentException, IllegalAccessException {
+		log.debug("Setting enum field:" + field + "=" + value);
 		field.set(obj, value);
 	}
 
 	private void setShort(Object obj, Field field, String value)
 			throws IllegalAccessException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.set(obj, new Short(Short.parseShort(value)));
 		}
 	}
@@ -182,6 +189,7 @@ public class ObjectBuilder {
 	private void setShortPrimitive(Object obj, Field field, String value)
 			throws IllegalAccessException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.setShort(obj, Short.parseShort(value));
 		}
 	}
@@ -189,6 +197,7 @@ public class ObjectBuilder {
 	private void setBoolean(Object obj, Field field, String value)
 			throws IllegalAccessException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.set(obj, new Boolean(Boolean.parseBoolean(value)));
 		}
 	}
@@ -196,6 +205,7 @@ public class ObjectBuilder {
 	private void setBooleanPrimitive(Object obj, Field field, String value)
 			throws IllegalAccessException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.setBoolean(obj, Boolean.parseBoolean(value));
 		}
 	}
@@ -203,6 +213,7 @@ public class ObjectBuilder {
 	private void setLong(Object obj, Field field, String value)
 			throws IllegalAccessException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.set(obj, new Long(Long.parseLong(value)));
 		}
 	}
@@ -210,6 +221,7 @@ public class ObjectBuilder {
 	private void setLongPrimitive(Object obj, Field field, String value)
 			throws IllegalAccessException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.setLong(obj, Long.parseLong(value));
 		}
 	}
@@ -217,6 +229,7 @@ public class ObjectBuilder {
 	private void setObject(Object obj, Field field, String value)
 			throws IllegalAccessException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.set(obj, value);
 		}
 	}
@@ -224,6 +237,7 @@ public class ObjectBuilder {
 	private void setDouble(Object obj, Field field, String value)
 			throws IllegalAccessException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.set(obj, new Double(Double.parseDouble(value)));
 		}
 	}
@@ -231,6 +245,7 @@ public class ObjectBuilder {
 	private void setDoublePrimitive(Object obj, Field field, String value)
 			throws IllegalAccessException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.setDouble(obj, Double.parseDouble(value));
 		}
 	}
@@ -238,6 +253,7 @@ public class ObjectBuilder {
 	private void setInteger(Object obj, Field field, String value)
 			throws IllegalAccessException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.set(obj, new Integer(Integer.parseInt(value)));
 		}
 	}
@@ -245,6 +261,7 @@ public class ObjectBuilder {
 	private void setInt(Object obj, Field field, String value)
 			throws IllegalAccessException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.setInt(obj, Integer.parseInt(value));
 		}
 	}
@@ -252,6 +269,7 @@ public class ObjectBuilder {
 	private void setDate(Object obj, Field field, String value)
 			throws IllegalAccessException, IllegalArgumentException, ParseException {
 		if (value != null && value.length() > 0) {
+			log.debug("Setting enum field:" + field + "=" + value);
 			field.set(obj, new DateParser().parse(value));
 		}
 	}

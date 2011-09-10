@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.christhomson</groupId>
 	<artifactId>sibyl</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Sibyl - Cache Viewer</name>
 	<inceptionYear>2011</inceptionYear>

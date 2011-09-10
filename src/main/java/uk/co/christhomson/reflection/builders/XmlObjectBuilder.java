@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.jdom.Element;
 
 import uk.co.christhomson.sibyl.exception.CacheException;
@@ -38,7 +39,7 @@ Copyright (C) 2011 Chris Thomson
 */
 public class XmlObjectBuilder {
 	
-//	private static Map<String,Class> primitiveClasses = null;
+	private static final Logger log = Logger.getLogger(XmlObjectBuilder.class);
 	
 	private Class<?> cls = null;
 	private Object obj = null;
@@ -74,7 +75,7 @@ public class XmlObjectBuilder {
 
 	private Element processClass(Class<?> cls, String name, Set<Class<?>> parentClasses, Object obj, boolean isRoot) throws IllegalArgumentException, IllegalAccessException {
 		
-		System.out.println(cls + "-" + obj);
+		log.debug(cls + "-" + obj);
 		
 		Element elem = new Element("Class");
 		
@@ -140,12 +141,7 @@ public class XmlObjectBuilder {
 			while (!cls.equals(Object.class));
 		}
 		
-//		if (elem.getChildren().size() > 0) {
-			return elem;
-//		}
-//		else {
-//			return null;
-//		}
+		return elem;
 	}
 
 	private String formatDate(Date date) {
@@ -206,6 +202,8 @@ public class XmlObjectBuilder {
 		
 		if (obj != null) 
 			elem.setAttribute("value", obj.toString());
+	
+		log.debug("Creating field:" + name + "(" + type + ")" + "=" + obj);
 		
 		return elem;
 	}

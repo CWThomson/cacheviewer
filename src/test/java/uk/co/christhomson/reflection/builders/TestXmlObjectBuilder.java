@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.jdom.Element;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -41,6 +42,7 @@ public class TestXmlObjectBuilder {
 
 	@Before
 	public void setup() {
+		System.setProperty("log4j.configuration","src/test/resources/log4j.xml");	
 		xmlOutput = new XMLOutputter(Format.getPrettyFormat());
 	}
 
