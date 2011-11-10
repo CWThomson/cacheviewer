@@ -125,7 +125,7 @@ public class ObjectBuilder {
 			throws NoSuchFieldException, IllegalAccessException,
 			SecurityException, ClassNotFoundException, InstantiationException,
 			ParseException {
-		Field field = cls.getDeclaredField(fieldName);
+		Field field = getDeclaredField(cls,fieldName);
 		field.setAccessible(true);
 
 		Class fieldType = field.getType();
@@ -169,6 +169,20 @@ public class ObjectBuilder {
 			log.debug("Setting field:" + obj + "=" + subObj);
 			field.set(obj, subObj);
 			
+		}
+	}
+
+	private Field getDeclaredField(Class cls, String fieldName) throws NoSuchFieldException {
+		try {
+			return cls.getDeclaredField(fieldName);
+		}
+		catch (NoSuchFieldException e){
+			if (!cls.equals(Object.class)) {
+				return getDeclaredField(cls.getSuperclass(), fieldName);
+			}
+			else {
+				throw e;
+			}
 		}
 	}
 

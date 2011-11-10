@@ -138,7 +138,7 @@ public class XmlObjectBuilder {
 				
 				cls = cls.getSuperclass();
 			}
-			while (!cls.equals(Object.class));
+			while (cls != null && !cls.equals(Object.class));
 		}
 		
 		return elem;

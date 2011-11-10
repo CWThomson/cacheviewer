@@ -132,6 +132,7 @@ public class ExtractorServlet extends SibylXslServlet {
 		Element resultXml = null;
 
 		Map<String, Object> propMap = PropertyBuilder.processProperties(params);
+		System.out.println(propMap);
 
 		if (className != null) {
 			try {
@@ -140,7 +141,7 @@ public class ExtractorServlet extends SibylXslServlet {
 				Object key = objBuilder.build();
 
 				keyXml = generateXmlKey(cls, key, errorsXml);
-
+				
 				if (keyXml != null && keyXml.getChildren().size() > 0) {
 					cacheXml = new Element("Cache");
 					if (params.containsKey("cacheName")) {
