@@ -192,24 +192,27 @@ public class XmlObjectBuilder {
 				elem.setAttribute("type", fieldType.getName());
 				elem.setAttribute("shorttype", ClassBuilder.getShortType(fieldType.getName()));
 				
-				for (Object value : col) {
-					Element subElem = processClass(value.getClass(),value.toString(),parentClasses, value, false);
-					elem.addContent(subElem);
+				if (col != null) {
+					for (Object value : col) {
+						Element subElem = processClass(value.getClass(),value.toString(),parentClasses, value, false);
+						elem.addContent(subElem);
+					}
 				}
 				return elem;
 			}
 			else if (Map.class.isAssignableFrom(fieldType)) {
 				Map map = (Map) obj;
-//				Element elem = createField(field.getName(),"Map",null);
 				Element elem = new Element("Class");				
 				elem.setAttribute("name", field.getName());
 				elem.setAttribute("type", fieldType.getName());
 				elem.setAttribute("shorttype", ClassBuilder.getShortType(fieldType.getName()));
 				
-				for (Object key : map.keySet()) {
-					Object value = map.get(key);
-					Element subElem = processClass(value.getClass(),key.toString(),parentClasses, value, false);
-					elem.addContent(subElem);
+				if (map != null) {
+					for (Object key : map.keySet()) {
+						Object value = map.get(key);
+						Element subElem = processClass(value.getClass(),key.toString(),parentClasses, value, false);
+						elem.addContent(subElem);
+					}
 				}
 				return elem;
 			}
