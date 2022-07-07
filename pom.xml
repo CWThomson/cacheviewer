@@ -75,7 +75,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
-			<version>3.0.5.RELEASE</version>
+			<version>5.2.21.RELEASE</version>
 		</dependency>
 	</dependencies>
 	<description>Data within a modern day caching systems such as Oracle Coherence and Gigaspaces is difficult to extract on an adhoc basis for debugging purposes. This tool is designed to address these issues.
